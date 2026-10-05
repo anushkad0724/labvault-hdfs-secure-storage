@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+  <property><name>fs.defaultFS</name><value>hdfs://namenode:9000</value></property>
+  <property><name>hadoop.tmp.dir</name><value>/tmp/hadoop-root</value></property>
+  <property><name>hadoop.http.staticuser.user</name><value>hadoop</value></property>
+</configuration>

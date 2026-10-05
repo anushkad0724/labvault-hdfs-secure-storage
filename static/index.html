@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LabVault | Laboratory Cloud Storage</title>
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,Segoe UI,sans-serif;color:#17263a;background:#f2f6fb;font-synthesis:none}*{box-sizing:border-box}body{margin:0}.shell{max-width:880px;margin:48px auto;padding:0 20px}.top{display:flex;align-items:center;gap:12px;margin-bottom:28px}.mark{width:42px;height:42px;border-radius:13px;background:#124a68;color:white;display:grid;place-items:center;font-weight:800}.top small{display:block;color:#688096;margin-top:3px}.card{background:white;border:1px solid #dae4ec;border-radius:18px;padding:24px;margin-bottom:18px;box-shadow:0 8px 30px #21405a0a}h1{font-size:23px;margin:0 0 8px}p{color:#60768a;line-height:1.55;margin:0 0 20px}.drop{border:1px dashed #9eb4c2;background:#f8fbfd;padding:22px;border-radius:12px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}input{max-width:100%}button,.button{border:0;border-radius:9px;background:#176386;color:white;padding:11px 16px;font-weight:650;cursor:pointer;text-decoration:none}button:disabled{opacity:.55;cursor:wait}.muted{color:#71869a;font-size:13px;margin-top:12px}.file{border-top:1px solid #e8eef2;padding:15px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}.file:first-child{border:0}.file strong{display:block;overflow-wrap:anywhere}.file small{color:#71869a}.empty{padding:18px;color:#71869a;text-align:center}.notice{font-size:13px;color:#71869a;margin-top:18px}@media(max-width:560px){.shell{margin:24px auto}.card{padding:18px}.drop{align-items:flex-start}}
+  </style>
+</head>
+<body><main class="shell">
+  <header class="top"><div class="mark">LV</div><div><strong>LabVault</strong><small>Private file storage for your laboratory LAN</small></div></header>
+  <section class="card"><h1>Store a file securely</h1><p>Files are encrypted in authenticated blocks before storage. Your download is decrypted and checked automatically.</p>
+    <form id="upload" class="drop"><input id="file" type="file" required><button id="submit">Encrypt &amp; upload</button></form><div id="message" class="muted" role="status"></div>
+  </section>
+  <section class="card"><h1>Your stored files</h1><div id="files" class="empty">Loading files…</div><div class="notice">Classroom prototype for a trusted lab LAN. Anyone who can reach this app can download its files; add sign-in and HTTPS before broader sharing.</div></section>
+</main><script>
+const fmt=n=>n<1024?`${n} B`:n<1048576?`${(n/1024).toFixed(1)} KB`:`${(n/1048576).toFixed(1)} MB`;
+async function refresh(){const box=document.querySelector('#files');try{const r=await fetch('/api/files');if(!r.ok)throw Error();const files=await r.json();box.innerHTML=files.length?files.map(f=>`<div class="file"><div><strong>${escapeHtml(f.name)}</strong><small>${fmt(f.size)} · SHA-256 ${f.sha256.slice(0,12)}…</small></div><a class="button" href="/api/files/${encodeURIComponent(f.id)}/download">Download</a></div>`).join(''):'<div class="empty">No files yet. Upload one to get started.</div>'}catch{box.textContent='Could not load stored files.'}}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+document.querySelector('#upload').addEventListener('submit',async e=>{e.preventDefault();const file=document.querySelector('#file').files[0];if(!file)return;const btn=document.querySelector('#submit'),msg=document.querySelector('#message');btn.disabled=true;msg.textContent='Encrypting and storing file…';try{const form=new FormData();form.append('file',file);const r=await fetch('/api/files',{method:'POST',body:form});const body=await r.text();let data;try{data=JSON.parse(body)}catch{throw Error(body.slice(0,180)||'Upload failed')}if(!r.ok)throw Error(data.detail||'Upload failed');msg.textContent=`Stored as ${data.block_count} encrypted block${data.block_count===1?'':'s'}.`;e.target.reset();await refresh()}catch(err){msg.textContent=err.message}finally{btn.disabled=false}});refresh();
+</script></body></html>

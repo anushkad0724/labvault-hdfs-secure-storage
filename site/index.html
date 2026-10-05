@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LabVault is a learning project for encrypted, block-based file storage on a laboratory LAN using Apache HDFS.">
+  <title>LabVault — Secure lab file storage</title>
+  <style>
+    :root{color-scheme:dark;--bg:#08131d;--panel:#10212e;--panel2:#132936;--ink:#eef8f6;--muted:#a4bbc2;--line:#26404c;--mint:#83e1c4;--blue:#7cc9e8;--amber:#ffd38a;--max:1120px;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#16384a 0,transparent 38%),var(--bg);color:var(--ink);line-height:1.6}a{color:var(--mint)}.wrap{width:min(var(--max),calc(100% - 40px));margin:auto}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff16}.brand{display:flex;gap:11px;align-items:center;font-weight:750;letter-spacing:.02em}.logo{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--mint);color:#08201e;font-weight:900}.navlinks{display:flex;gap:25px;font-size:14px}.navlinks a{color:var(--muted);text-decoration:none}.navlinks a:hover{color:var(--mint)}.hero{padding:82px 0 66px;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}.eyebrow{color:var(--mint);font-size:12px;letter-spacing:.17em;text-transform:uppercase;font-weight:750}.hero h1{font-size:clamp(42px,6vw,72px);line-height:1.02;letter-spacing:-.055em;margin:18px 0 22px;max-width:700px}.hero h1 em{font-style:normal;color:var(--mint)}.lead{font-size:18px;color:var(--muted);max-width:610px}.actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:30px}.button{display:inline-flex;align-items:center;gap:9px;border-radius:9px;background:var(--mint);color:#09231f;font-weight:750;text-decoration:none;padding:12px 17px}.textlink{font-size:14px;text-decoration:none}.stamp{display:flex;gap:9px;align-items:center;color:var(--amber);font-size:13px;margin-top:28px}.panel{border:1px solid var(--line);background:#0c1c27d9;border-radius:18px;padding:24px;box-shadow:0 28px 70px #0005}.diagram-title{font-size:13px;color:var(--muted);margin:0 0 20px}.flow{display:grid;gap:10px}.node{border:1px solid #315365;background:var(--panel);border-radius:10px;padding:13px 15px;display:flex;gap:12px;align-items:center}.node-icon{width:30px;height:30px;border-radius:8px;background:#173c48;color:var(--mint);display:grid;place-items:center;font-size:14px;font-weight:800;flex:none}.node strong{display:block;font-size:14px}.node small{display:block;color:var(--muted);font-size:12px}.arrow{height:10px;border-left:1px dashed #5a8690;margin-left:29px}.blockrow{display:flex;gap:6px;margin-top:2px}.block{height:8px;flex:1;border-radius:9px;background:linear-gradient(90deg,#78dfbd,#4aa8c6)}.section{padding:67px 0;border-top:1px solid #ffffff16}.sectionhead{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:30px}.section h2{font-size:clamp(28px,4vw,42px);letter-spacing:-.04em;line-height:1.1;margin:8px 0}.sectionhead p{max-width:450px;color:var(--muted);margin:0}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{border:1px solid var(--line);background:var(--panel);border-radius:13px;padding:21px}.card .number{color:var(--mint);font-size:12px;font-weight:750;letter-spacing:.1em}.card h3{font-size:17px;margin:14px 0 7px}.card p{color:var(--muted);font-size:14px;margin:0}.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:23px}.tag{border:1px solid #315060;color:#bdd3d6;border-radius:99px;padding:5px 10px;font-size:12px}.callout{display:grid;grid-template-columns:1fr 1fr;gap:18px}.callout article{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:24px}.callout h3{margin:0 0 9px}.callout p{color:var(--muted);font-size:14px;margin:0}.warning{border-left:3px solid var(--amber)!important}.footer{border-top:1px solid #ffffff16;padding:25px 0 35px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.footer strong{color:var(--ink)}@media(max-width:760px){.hero{grid-template-columns:1fr;gap:32px;padding:56px 0}.navlinks{gap:13px}.cards{grid-template-columns:1fr}.callout{grid-template-columns:1fr}.sectionhead{display:block}.sectionhead p{margin-top:12px}}@media(max-width:440px){.nav{height:auto;padding:16px 0;align-items:flex-start;gap:15px;flex-direction:column}.navlinks{width:100%;justify-content:space-between;font-size:12px}}
+  </style>
+</head>
+<body>
+  <header class="wrap nav">
+    <a class="brand" href="#home" style="color:inherit;text-decoration:none"><span class="logo">LV</span><span>LABVAULT</span></a>
+    <nav class="navlinks" aria-label="Main navigation"><a href="#how">How it works</a><a href="#build">Build</a><a href="#scope">Project scope</a></nav>
+  </header>
+  <main>
+    <section class="wrap hero" id="home">
+      <div>
+        <div class="eyebrow">A laboratory LAN cloud storage project</div>
+        <h1>Private files.<br><em>Distributed blocks.</em></h1>
+        <p class="lead">LabVault is a hands-on prototype that encrypts files, divides them into blocks, and stores those blocks in Apache HDFS on a local network.</p>
+        <div class="actions"><a class="button" href="#how">Explore the project <span aria-hidden="true">→</span></a><a class="textlink" href="#build">See the technology</a></div>
+        <div class="stamp"><span aria-hidden="true">●</span> Working classroom prototype · single-node HDFS demo</div>
+      </div>
+      <aside class="panel" aria-label="LabVault data flow">
+        <p class="diagram-title">ONE FILE · ENCRYPTED BEFORE STORAGE</p>
+        <div class="flow">
+          <div class="node"><span class="node-icon">↑</span><div><strong>Upload a file</strong><small>Web interface sends it to the controller</small></div></div>
+          <div class="arrow"></div>
+          <div class="node"><span class="node-icon">#</span><div><strong>Encrypt and split</strong><small>AES-256-GCM · 1 MiB application blocks</small><div class="blockrow" aria-label="Encrypted blocks"><i class="block"></i><i class="block"></i><i class="block"></i><i class="block"></i><i class="block"></i></div></div></div>
+          <div class="arrow"></div>
+          <div class="node"><span class="node-icon">▦</span><div><strong>Store in HDFS</strong><small>NameNode tracks blocks · DataNode stores them</small></div></div>
+          <div class="arrow"></div>
+          <div class="node"><span class="node-icon">↓</span><div><strong>Download and verify</strong><small>Reassemble · authenticate · check SHA-256</small></div></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" id="how"><div class="wrap">
+      <div class="sectionhead"><div><div class="eyebrow">The data path</div><h2>From upload to verified download</h2></div><p>The controller handles application-level blocks. HDFS then manages its own distributed storage blocks beneath them.</p></div>
+      <div class="cards">
+        <article class="card"><div class="number">01 / PROTECT</div><h3>Encrypt every block</h3><p>Each block is encrypted using AES-GCM with its own random nonce and a file/block identifier for authentication.</p></article>
+        <article class="card"><div class="number">02 / STORE</div><h3>Write to HDFS</h3><p>Encrypted blocks are saved through WebHDFS. SQLite keeps the file name, block locations, nonces, and digest.</p></article>
+        <article class="card"><div class="number">03 / RESTORE</div><h3>Reassemble and verify</h3><p>On download, LabVault retrieves each block, checks its authentication tag, joins the original bytes, and verifies SHA-256.</p></article>
+      </div>
+    </div></section>
+
+    <section class="section" id="build"><div class="wrap">
+      <div class="sectionhead"><div><div class="eyebrow">Built with open tools</div><h2>Small system, real components</h2></div><p>Designed to make the main cloud-storage ideas visible and easy to demonstrate in a lab.</p></div>
+      <div class="callout">
+        <article><h3>Storage and controller</h3><p>Python · FastAPI · Apache Hadoop HDFS · WebHDFS · Docker Compose · SQLite</p><div class="tags"><span class="tag">AES-256-GCM</span><span class="tag">1 MiB blocks</span><span class="tag">SHA-256 integrity</span></div></article>
+        <article><h3>Static site delivery</h3><p>This documentation site is hosted in a private Amazon S3 bucket and delivered globally through Amazon CloudFront over HTTPS.</p><div class="tags"><span class="tag">Private S3 origin</span><span class="tag">CloudFront CDN</span><span class="tag">HTTPS</span></div></article>
+      </div>
+    </div></section>
+
+    <section class="section" id="scope"><div class="wrap">
+      <div class="sectionhead"><div><div class="eyebrow">Honest project scope</div><h2>A prototype to learn from</h2></div><p>The running demonstration currently uses one NameNode and one DataNode on one computer. It shows the flow, not production availability.</p></div>
+      <div class="callout"><article><h3>What it demonstrates</h3><p>Encrypted file uploads, application-level segmentation, HDFS storage, download and reconstruction, and a separate static site for cloud CDN learning.</p></article><article class="warning"><h3>For a trusted lab only</h3><p>Hadoop security is off in this local demo and the controller has no sign-in yet. The HDFS web interface and LabVault should not be exposed to the public internet.</p></article></div>
+    </div></section>
+  </main>
+  <footer class="wrap footer"><span><strong>LABVAULT</strong> · Secure LAN storage learning project</span><span>Built for a college mini project · 2026</span></footer>
+</body>
+</html>
